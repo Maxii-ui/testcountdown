@@ -26,7 +26,7 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Express' })
+  res.render('index', { name: process.env.EVENT_NAME || 'No event', date: process.env.EVENT_DATE })
 })
 
 http.createServer(app).listen(app.get('port'), function(){
