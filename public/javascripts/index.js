@@ -17,10 +17,9 @@
   meter.append('path').attr('class', 'background').attr('d', arcBackground.endAngle(twoPi))
 
   var $progress = meter.append('path').attr('class', 'foreground')
-    , $days = meter.append('text').text(' Days').attr('transform', 'translate(120,-50)')
-    , $hours = meter.append('text').text(' Hours').attr('transform', 'translate(120,-10)')
-    , $minutes = meter.append('text').text(' Minutes').attr('transform', 'translate(120,30)')
-    , $seconds = meter.append('text').text(' Seconds').attr('transform', 'translate(120,70)')
+    , $days = meter.append('text').text(' Days').attr('transform', 'translate(120,-30)')
+    , $hours = meter.append('text').text(' Hours').attr('transform', 'translate(120,10)')
+    , $minutes = meter.append('text').text(' Minutes').attr('transform', 'translate(120,50)')
 
   timerId = setInterval(function() {
     var now = new Date()
@@ -42,17 +41,14 @@
       return
     }
 
-    var secondsText = seconds + ' Second'
-      , minutesText = minutes + ' Minute'
+    var minutesText = minutes + ' Minute'
       , hoursText = hours + ' Hour'
       , daysText = days + ' Day'
 
-    if (seconds !== 1) secondsText += 's'
     if (minutes !== 1) minutesText += 's'
     if (hours !== 1) hoursText += 's'
     if (days !== 1) daysText += 's'
 
-    $seconds.text(secondsText)
     $minutes.text(minutesText)
     $hours.text(hoursText)
     $days.text(daysText)
