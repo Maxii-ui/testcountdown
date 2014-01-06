@@ -41,7 +41,13 @@ app.get('/', function (req, res) {
     }
   })
 
-  if (!nextEvent) nextEvent = { name: 'No Event' }
+  // Default to Christmas
+  if (!nextEvent) {
+    var christmasDate = new Date()
+    christmasDate.setMonth(11, 25)
+
+    nextEvent = { name: 'Christmas', date: christmasDate.toString() }
+  }
 
   res.render('index', { nextEvent: nextEvent, lastEventDate: lastEventDate.toString() })
 })
