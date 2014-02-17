@@ -26,7 +26,30 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', function (req, res) {
-  res.render('index', { name: process.env.EVENT_NAME || 'No event', date: process.env.EVENT_DATE })
+  var events = JSON.parse(process.env.EVENTS)
+    , lastEventDate = new Date()
+    , newEventDate = new Date()
+    , nextEvent = false
+
+  events.forEach(function (event) {
+    var eventDate = new Date(event.date)
+
+    if (eventDate < lastEventDate) lastEventDate = eventDate
+
+    if (eventDate > newEventDate) {
+      nextEvent = event
+    }
+  })
+
+  // Default to Christmas
+  if (!nextEvent) {
+    var christmasDate = new Date()
+    christmasDate.setMonth(11, 25)
+
+    nextEvent = { name: 'Christmas', date: christmasDate.toString() }
+  }
+
+  res.render('index', { nextEvent: nextEvent, lastEventDate: lastEventDate.toString() })
 })
 
 http.createServer(app).listen(app.get('port'), function(){

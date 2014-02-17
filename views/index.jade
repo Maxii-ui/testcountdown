@@ -1,9 +1,14 @@
 extends layout
 
 block content
-  h1=name
-  input#date(type='hidden', value=date)
-  span#countdown
+  .module.module--date-countdown
+    .module__header
+      h2.module__title=nextEvent.name
+    .module__body
+      .js-donut-graph
 
-  script(src='/javascripts/countdown.js')
+  input.js-date(type='hidden', value=nextEvent.date, data-start-date=lastEventDate)
+
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js')
+  script(src='http://d3js.org/d3.v3.min.js')
   script(src='/javascripts/index.js')
