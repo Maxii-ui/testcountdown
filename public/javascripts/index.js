@@ -33,10 +33,14 @@
     minutes = minutes-(days * 24 * 60) - (hours * 60)
     seconds = seconds-(days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60)
 
-    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+    if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
       clearInterval(timerId)
       var $eventName = $('.module module--date-countdown h1')
       $eventName.text($eventName.text() + ' has begun!')
+
+      setTimeout(function () {
+        location.reload(true)
+      }, 10000)
 
       return
     }
